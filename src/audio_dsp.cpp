@@ -15,29 +15,30 @@ int init_audio_i2s() {
     #if defined(USE_AUDIO_I2S)
     audiopool = init_audio();
 
-    if(audiopool == NULL) {
+    if (audiopool == NULL) {
         printf("Failed to initialize audio subsystem\n");
         return -1;
     }
+
+    return 0;
     #else
     #warn "Audio is not enabled"
     #endif
 }
 
-void __not_in_flash_func(i2s_callback_func())
-    {
+void __not_in_flash_func(i2s_callback_func()) {
         audio_buffer_t *buffer = take_audio_buffer(audiopool, false);
-        if (buffer == NULL)
-        {
+        if (buffer == NULL) {
             return;
         }
-        int32_t *samples = (int32_t *)buffer->buffer->bytes;
+
+        int32_t *samples = reinterpret_cast<int32_t *>(buffer->buffer->bytes);
+
         // We are filling the buffer with 32-bit samples (2 channels)
-        for (uint i = 0; i < buffer->max_sample_count; i++)
-        {
+        for (uint i = 0; i < buffer->max_sample_count; i++) {
             float left_out, right_out = 0.0f;
-            samples[i * 2 + 0] = float_to_int32(left_out);  // LEFT
-            samples[i * 2 + 1] = float_to_int32(right_out); // RIGHT
+            samples[i * 2 + 0] = float_to_int32(left_out);
+            samples[i * 2 + 1] = float_to_int32(right_out);
         }
 
         buffer->sample_count = buffer->max_sample_count;

@@ -11,6 +11,8 @@ include(cmake/freertos_import.cmake)
 include(project_config.cmake)
 
 project(${PROJECT_NAME} C CXX ASM)
+# Export the project name to a file
+file(WRITE "${CMAKE_BINARY_DIR}/project_name.txt" "${PROJECT_NAME}")
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)

@@ -14,3 +14,7 @@
 #include <hardware/vreg.h>
 #include <hardware/structs/rosc.h>
 #include <hardware/sync.h>
+
+#if defined(USE_AUDIO_I2S)
+#include <audio_dsp.h>
+#endif

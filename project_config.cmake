@@ -17,7 +17,7 @@ set(ENABLE_FREERTOS 1)
 set(ENABLE_AUDIO_I2S 1)
 
 # Board specific peripheral settings
-set(USE_PSRAM 1)
+set(USE_PSRAM 0)
 set(RP2350_CS_PIN 0)
 set(FLASH_LENGTH 4096000)
 set(PSRAM_LENGTH 0x800000)

@@ -23,6 +23,8 @@
 
 MEMORY
 {
+    /* TODO: Actually use the variables from the project_config.cmake */
+    
     FLASH(rx) : ORIGIN = 0x10000000, LENGTH = 4M
     PSRAM(rwx) : ORIGIN = 0x11000000, LENGTH = 8M
     RAM(rwx) : ORIGIN =  0x20000000, LENGTH = 512k

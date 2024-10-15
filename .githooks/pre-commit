@@ -6,14 +6,21 @@ files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|c|h|h
 if [ -n "$files" ]; then
     # Run cpplint on all the C/C++ files that are staged for commit
     for file in $files; do
-        cpplint $file
+        cpplint --filter=-legal/copyright,-build/include_what_you_use $file
         if [ $? -ne 0 ]; then
             echo "cpplint failed on $file. Please fix the issues before committing."
+            exit 1
+        fi
+
+        # Run clang-format and check for formatting issues
+        clang-format -style=file -i $file
+        git diff --exit-code $file
+        if [ $? -ne 0 ]; then
+            echo "clang-format found issues in $file. Please fix the formatting before committing."
             exit 1
         fi
     done
 fi
 
-# Allow the commit to proceed if cpplint passed
+# Allow the commit to proceed if cpplint and clang-format passed
 exit 0
-

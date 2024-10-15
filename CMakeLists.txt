@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 set(PICO_SDK_FETCH_FROM_GIT on)
 set(PICO_EXTRAS_FETCH_FROM_GIT on)
+set(PICO_PLATFORM "rp2350-arm-s")
 
 # Pull in SDK (must be before project)
 include(cmake/pico_sdk_import.cmake)
@@ -18,7 +19,6 @@ file(WRITE "${CMAKE_BINARY_DIR}/project_name.txt" "${PROJECT_NAME}")
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-set(PICO_PLATFORM "rp2350-arm-s")
 
 if (PICO_SDK_VERSION_STRING VERSION_LESS "2.0.0")
     message(FATAL_ERROR "Raspberry Pi Pico SDK version 2.0.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
@@ -95,7 +95,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
         USB_MODE_PICOSDK=${USB_MODE_PICOSDK}
 
         PICO_USE_SW_SPIN_LOCKS=1
-
         CMAKE_PROJECT_NAME="${PROJECT_NAME}"
 
         GIT_COMMIT_HASH=\"${GIT_COMMIT_HASH}\"

@@ -7,6 +7,7 @@ set(PICO_EXTRAS_FETCH_FROM_GIT on)
 include(cmake/pico_sdk_import.cmake)
 include(cmake/pico_extras_import_optional.cmake)
 include(cmake/freertos_import.cmake)
+include(cmake/git_vars.cmake)
 
 include(project_config.cmake)
 
@@ -61,6 +62,10 @@ if(ENABLE_AUDIO_I2S)
     target_link_libraries(${PROJECT_NAME} Audio)
 endif()
 
+if(ENABLE_FREERTOS)
+    target_link_libraries(${PROJECT_NAME} FreeRTOS)
+endif()
+
 # Base libraries
 target_link_libraries(${PROJECT_NAME}
         hardware_adc
@@ -77,7 +82,6 @@ target_link_libraries(${PROJECT_NAME}
         pico_util_buffer
         pico_multicore
         pico_stdio_uart
-        FreeRTOS
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -85,6 +89,11 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
         USE_AUDIO_I2S=${ENABLE_AUDIO_I2S}
         USB_MODE_PICOSDK=${USB_MODE_PICOSDK}
 
+        CMAKE_PROJECT_NAME="${PROJECT_NAME}"
+
+        GIT_COMMIT_HASH=\"${GIT_COMMIT_HASH}\"
+        GIT_BRANCH=\"${GIT_BRANCH}\"
+        GIT_TAG=\"${GIT_TAG}\"
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
@@ -94,3 +103,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
 add_compile_options("-Wall" "-Wredundant-decls")
 
 pico_add_extra_outputs(${PROJECT_NAME})
+
+message(STATUS "Git commit hash: ${GIT_COMMIT_HASH}")
+message(STATUS "Git branch: ${GIT_BRANCH}")
+message(STATUS "Git tag: ${GIT_TAG}")

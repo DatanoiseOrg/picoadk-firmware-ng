@@ -13,6 +13,7 @@ set(AUDIO_SAMPLE_RATE 48000)
 set(AUDIO_SAMPLE_BITS 32)
 
 # Features to enable
+set(ENABLE_FREERTOS 1)
 set(ENABLE_AUDIO_I2S 1)
 
 # Board specific I/O settings

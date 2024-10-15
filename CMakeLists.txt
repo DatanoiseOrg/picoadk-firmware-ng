@@ -78,6 +78,7 @@ if(ENABLE_AUDIO_I2S)
     add_subdirectory(core/lib/audio)
     target_link_libraries(${PROJECT_NAME} Audio)
     target_include_directories(${PROJECT_NAME} PRIVATE core/lib/audio/include)
+    target_sources(${PROJECT_NAME} PRIVATE src/audio_dsp.cpp)
 endif()
 
 if(ENABLE_FREERTOS)

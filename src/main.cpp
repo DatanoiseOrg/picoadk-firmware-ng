@@ -7,28 +7,13 @@ extern "C" {
 #endif
 
 #if defined(USE_AUDIO_I2S)
-#include <audio_subsystem.h>
-audio_buffer_pool_t *audiopool;
+#include "audio_dsp.h"
 #endif
 
 #define LED_DELAY_MS 500
 
 int main() {
-    #if defined(USE_AUDIO_I2S)
-    audiopool = init_audio();
-    #else
-    #warn "Audio is not enabled"
-    #endif
-
-    // set gpio2 as output
-    gpio_init(2);
-    gpio_set_dir(2, GPIO_OUT);
-
-    printf("Hello, World!\n");
-    while (1) {
-        gpio_put(2, 1);
-        sleep_ms(LED_DELAY_MS);
-    }
+    init_audio_i2s();;
 }
 
 #ifdef __cplusplus

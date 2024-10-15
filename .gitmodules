@@ -1,3 +1,6 @@
 [submodule "core/lib/FreeRTOS-Kernel"]
 	path = core/lib/FreeRTOS-Kernel
 	url = https://github.com/earlephilhower/FreeRTOS-Kernel.git
+[submodule "core/lib/tlsf"]
+	path = core/lib/tlsf
+	url = https://github.com/earlephilhower/tlsf.git

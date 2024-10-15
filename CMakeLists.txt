@@ -113,9 +113,7 @@ if(USE_PSRAM)
         RP2350_CS_PIN=${RP2350_CS_PIN}
     )
 
-    add_executable(${PROJECT_NAME}
-        core/src/psram.cpp
-    )
+    target_sources(${PROJECT_NAME} PRIVATE core/src/psram.cpp)
 
     target_include_directories(${PROJECT_NAME} PRIVATE core/include)
 

@@ -110,6 +110,12 @@ if(USE_PSRAM)
         RP2350_CS_PIN=${RP2350_CS_PIN}
     )
 
+    add_executable(${PROJECT_NAME}
+        core/src/psram.cpp
+    )
+
+    target_include_directories(${PROJECT_NAME} PRIVATE core/include)
+
     add_custom_target(
         generate_linker_script ALL
         COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/simplesub.py -i ${CMAKE_CURRENT_SOURCE_DIR}/core/ld/rp2350_psram.ld.in -o ${CMAKE_CURRENT_BINARY_DIR}/rp2350_psram.ld --sub __FLASH_LENGTH__ ${FLASH_LENGTH} --sub __EEPROM_START__ ${EEPROM_START} --sub __FS_START__ ${FS_START} --sub __FS_END__ ${FS_END} --sub __PSRAM_LENGTH__ ${PSRAM_LENGTH} --sub __RAM_LENGTH__ ${RAM_LENGTH}

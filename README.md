@@ -62,10 +62,10 @@ cmake ..
 Build the project:
 
 ```bash
-    make ( Add -j to build in parallel using all your CPU cores )
+make ( Add -j to build in parallel using all your CPU cores )
 ```
 
-This will create the firmware binaries in the build directory.
+This will create the firmware binaries in the **build** directory.
 
 ## Flashing
 

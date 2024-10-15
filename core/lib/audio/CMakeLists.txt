@@ -5,7 +5,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../../project_config.cmake)
 add_library(Audio STATIC
 	${CMAKE_CURRENT_SOURCE_DIR}/src/audio.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/audio_i2s.c
-	${CMAKE_CURRENT_SOURCE_DIR}/src/audio_subsystem.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/audio_subsystem.c
 )
 
 target_include_directories(Audio PUBLIC

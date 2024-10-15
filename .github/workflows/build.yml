@@ -237,7 +237,7 @@ jobs:
       run: cp build/main.uf2 ./${{ matrix.config.artifact }}
 
     - name: Upload
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         path: ./${{ matrix.config.artifact }}
         name: ${{ matrix.config.artifact }}

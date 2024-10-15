@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Get all the files that are about to be committed
+files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|c|h|hpp)$')
+
+if [ -n "$files" ]; then
+    # Run cpplint on all the C/C++ files that are staged for commit
+    for file in $files; do
+        cpplint $file
+        if [ $? -ne 0 ]; then
+            echo "cpplint failed on $file. Please fix the issues before committing."
+            exit 1
+        fi
+    done
+fi
+
+# Allow the commit to proceed if cpplint passed
+exit 0
+

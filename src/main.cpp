@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include "pico/stdlib.h"
-#include "core.h"
+#include <pico/stdlib.h>
+#include <core.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #if defined(USE_AUDIO_I2S)
-#include "audio_subsystem.h"
+#include <audio_subsystem.h>
 audio_buffer_pool_t *audiopool;
 #endif
 

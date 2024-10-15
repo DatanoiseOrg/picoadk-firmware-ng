@@ -59,14 +59,14 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -G Ninja
+        cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
         # CMake will write project_name.txt with the project name
         cat project_name.txt  # Just to verify the project name is written
 
     - name: Build Firmware
       run: |
         cd build
-        ninja
+        make -j
 
     - name: Copy UF2 File
       run: |

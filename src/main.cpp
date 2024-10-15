@@ -7,7 +7,11 @@ extern "C" {
 #endif
 
 int main() {
-    init_audio_i2s();;
+    int result = init_audio_i2s();
+    if (result != 0) {
+        printf("Failed to initialize audio subsystem\n");
+        return -1;
+    }
 
     while (true) {
         __wfi();  // Wait for interrupt

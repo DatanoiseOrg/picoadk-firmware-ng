@@ -66,6 +66,8 @@ target_link_libraries(${PROJECT_NAME}
         pico_util_buffer
         pico_multicore
         pico_stdio_uart
+        hardware_sync_spin_lock
+        hardware_sync
 )
 
 # Check if USB_MODE_PICOSDK is defined

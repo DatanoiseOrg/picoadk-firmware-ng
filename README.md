@@ -44,6 +44,7 @@ Clone the PicoADK NG Firmware repository:
 ```bash
 git clone https://github.com/DatanoiseTV/PicoADK-NG-Firmware.git
 cd PicoADK-NG-Firmware
+```
 
 Create a build directory:
 

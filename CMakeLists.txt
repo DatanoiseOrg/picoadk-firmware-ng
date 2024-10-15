@@ -18,6 +18,8 @@ file(WRITE "${CMAKE_BINARY_DIR}/project_name.txt" "${PROJECT_NAME}")
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+set(PICO_PLATFORM "rp2350-arm-s")
+
 if (PICO_SDK_VERSION_STRING VERSION_LESS "2.0.0")
     message(FATAL_ERROR "Raspberry Pi Pico SDK version 2.0.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
 endif()
@@ -101,6 +103,23 @@ pico_set_program_name(${PROJECT_NAME} "${PROJECT_NAME}")
 target_link_options(${PROJECT_NAME} PRIVATE
         -Xlinker --print-memory-usage
 )
+
+if(USE_PSRAM)
+    message(WARNING "Careful, using PSRAM support for RP2350. This is experimental and may not work as expected.")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE
+        RP2350_CS_PIN=${RP2350_CS_PIN}
+    )
+
+    add_custom_target(
+        generate_linker_script ALL
+        COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/simplesub.py -i ${CMAKE_CURRENT_SOURCE_DIR}/core/ld/rp2350_psram.ld.in -o ${CMAKE_CURRENT_BINARY_DIR}/rp2350_psram.ld --sub __FLASH_LENGTH__ ${FLASH_LENGTH} --sub __EEPROM_START__ ${EEPROM_START} --sub __FS_START__ ${FS_START} --sub __FS_END__ ${FS_END} --sub __PSRAM_LENGTH__ ${PSRAM_LENGTH} --sub __RAM_LENGTH__ ${RAM_LENGTH}
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/core/ld/rp2350_psram.ld.in ${CMAKE_CURRENT_SOURCE_DIR}/tools/simplesub.py
+    )
+
+    add_dependencies(${PROJECT_NAME} generate_linker_script)
+
+    pico_set_linker_script(${PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/rp2350_psram.ld)
+endif()
 
 add_compile_options("-Wall" "-Wredundant-decls")
 

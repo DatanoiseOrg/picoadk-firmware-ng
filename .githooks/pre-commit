@@ -3,8 +3,8 @@
 # Get all the files that are about to be committed
 files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|c|h|hpp)$')
 
-# Exclude files in core/lib
-files_to_lint=$(echo "$files" | grep -v "^core/lib/")
+# Exclude files in core
+files_to_lint=$(echo "$files" | grep -v "^core")
 
 if [ -n "$files_to_lint" ]; then
     # Run cpplint on all the C/C++ files that are staged for commit, except those in core/lib

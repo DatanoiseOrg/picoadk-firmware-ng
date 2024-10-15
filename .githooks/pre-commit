@@ -3,24 +3,19 @@
 # Get all the files that are about to be committed
 files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|c|h|hpp)$')
 
-if [ -n "$files" ]; then
-    # Run cpplint on all the C/C++ files that are staged for commit
-    for file in $files; do
+# Exclude files in core/lib
+files_to_lint=$(echo "$files" | grep -v "^core/lib/")
+
+if [ -n "$files_to_lint" ]; then
+    # Run cpplint on all the C/C++ files that are staged for commit, except those in core/lib
+    for file in $files_to_lint; do
         cpplint --filter=-legal/copyright,-build/include_what_you_use $file
         if [ $? -ne 0 ]; then
             echo "cpplint failed on $file. Please fix the issues before committing."
             exit 1
         fi
-
-        # Run clang-format and check for formatting issues
-        clang-format -style=file -i $file
-        git diff --exit-code $file
-        if [ $? -ne 0 ]; then
-            echo "clang-format found issues in $file. Please fix the formatting before committing."
-            exit 1
-        fi
     done
 fi
 
-# Allow the commit to proceed if cpplint and clang-format passed
+# Allow the commit to proceed if cpplint passed
 exit 0

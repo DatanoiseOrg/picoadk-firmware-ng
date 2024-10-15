@@ -56,6 +56,11 @@ if(NOT USB_MODE_PICOSDK)
     )
 endif()
 
+if(ENABLE_AUDIO_I2S)
+    add_subdirectory(core/lib/audio)
+    target_link_libraries(${PROJECT_NAME} Audio)
+endif()
+
 # Base libraries
 target_link_libraries(${PROJECT_NAME}
         hardware_adc
@@ -77,7 +82,9 @@ target_link_libraries(${PROJECT_NAME}
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         CPU_FREQ_KHZ=${CPU_FREQ_KHZ}
-        USE_AUDIO_I2S=1
+        USE_AUDIO_I2S=${ENABLE_AUDIO_I2S}
+        USB_MODE_PICOSDK=${USB_MODE_PICOSDK}
+
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE

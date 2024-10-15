@@ -42,29 +42,11 @@ include_directories(
     ".")
 
 add_executable(${PROJECT_NAME}
-    src/main.c
+    src/main.cpp
 )
 
 # Add the standard library to the build
 target_link_libraries(${PROJECT_NAME} pico_stdlib)
-
-
-# Check if USB_MODE_PICOSDK is defined
-if(NOT USB_MODE_PICOSDK)
-    target_link_libraries(${PROJECT_NAME}
-        tinyusb_device
-        tinyusb_board
-    )
-endif()
-
-if(ENABLE_AUDIO_I2S)
-    add_subdirectory(core/lib/audio)
-    target_link_libraries(${PROJECT_NAME} Audio)
-endif()
-
-if(ENABLE_FREERTOS)
-    target_link_libraries(${PROJECT_NAME} FreeRTOS)
-endif()
 
 # Base libraries
 target_link_libraries(${PROJECT_NAME}
@@ -84,6 +66,24 @@ target_link_libraries(${PROJECT_NAME}
         pico_stdio_uart
 )
 
+# Check if USB_MODE_PICOSDK is defined
+if(NOT USB_MODE_PICOSDK)
+    target_link_libraries(${PROJECT_NAME}
+        tinyusb_device
+        tinyusb_board
+    )
+endif()
+
+if(ENABLE_AUDIO_I2S)
+    add_subdirectory(core/lib/audio)
+    target_link_libraries(${PROJECT_NAME} Audio)
+    target_include_directories(${PROJECT_NAME} PRIVATE core/lib/audio/include)
+endif()
+
+if(ENABLE_FREERTOS)
+    target_link_libraries(${PROJECT_NAME} FreeRTOS)
+endif()
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         CPU_FREQ_KHZ=${CPU_FREQ_KHZ}
         USE_AUDIO_I2S=${ENABLE_AUDIO_I2S}
@@ -95,6 +95,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
         GIT_BRANCH=\"${GIT_BRANCH}\"
         GIT_TAG=\"${GIT_TAG}\"
 )
+pico_set_program_name(${PROJECT_NAME} "${PROJECT_NAME}")
 
 target_link_options(${PROJECT_NAME} PRIVATE
         -Xlinker --print-memory-usage

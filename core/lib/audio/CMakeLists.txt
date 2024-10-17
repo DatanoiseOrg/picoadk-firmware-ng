@@ -1,19 +1,20 @@
-cmake_minimum_required(VERSION 3.12)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../../project_config.cmake)
+# include project_config.cmake from top dir
+include(${CMAKE_CURRENT_LIST_DIR}/../../../project_config.cmake)	
 
 add_library(Audio STATIC
-	${CMAKE_CURRENT_SOURCE_DIR}/src/audio.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/audio_i2s.c
-	${CMAKE_CURRENT_SOURCE_DIR}/src/audio_subsystem.c
+	src/audio.cpp
+	src/audio_i2s.c
+	src/audio_subsystem.cpp
 )
 
 target_include_directories(Audio PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_LIST_DIR}/include
 )
 
-target_compile_definitions(Audio PUBLIC
-	AUDIO_SAMPLE_RATE=${AUDIO_SAMPLE_RATE}
+target_compile_definitions(Audio PRIVATE
+	SAMPLE_RATE=${AUDIO_SAMPLE_RATE}
+	SAMPLE_BITS=${AUDIO_SAMPLE_BITS}
 	PIN_I2S_DOUT=${PIN_I2S_DOUT}
 	PIN_I2S_BCK=${PIN_I2S_BCK}
 )

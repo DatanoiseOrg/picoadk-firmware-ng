@@ -13,7 +13,7 @@ audio_buffer_pool_t *audiopool;
 
 int init_audio_i2s() {
     #if defined(USE_AUDIO_I2S)
-    audiopool = init_audio();
+    //audiopool = init_audio();
 
     if (audiopool == NULL) {
         printf("Failed to initialize audio subsystem\n");

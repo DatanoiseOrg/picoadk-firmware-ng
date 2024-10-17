@@ -6,6 +6,7 @@
 
 // Modified by Elehobica, 2021
 
+#include <cstring>
 #include "audio.h"
 #include "sample_conversion.h"
 

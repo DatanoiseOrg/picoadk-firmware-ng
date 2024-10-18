@@ -42,7 +42,7 @@ Follow the instructions for Debian/Ubuntu inside your WSL instance.
 Clone the PicoADK NG Firmware repository:
 
 ```bash
-git clone https://github.com/DatanoiseTV/PicoADK-NG-Firmware.git
+git clone https://github.com/DatanoiseTV/picoadk-firmware-ng.git
 cd PicoADK-NG-Firmware
 ```
 

@@ -30,7 +30,7 @@ Update and install the required packages:
 
 ```bash
 sudo apt update
-sudo apt install cmake gcc-arm-none-eabi build-essential git cppint
+sudo apt install cmake gcc-arm-none-eabi build-essential git cpplint
 ```
 
 

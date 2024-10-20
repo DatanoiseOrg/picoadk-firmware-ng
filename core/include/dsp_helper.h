@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 static inline int32_t float_to_int32(float input) {
     // Simple conversion from float to int32
@@ -12,7 +13,7 @@ static inline int32_t float_to_int32(float input) {
     } else if (input <= -1.0f) {
         output = INT32_MIN;
     } else {
-        output = static_cast<int32_t>(input) * static_cast<float>(INT32_MAX);
+        output = output = (int32_t)(input * (float)INT32_MAX);
     }
 
     return output;

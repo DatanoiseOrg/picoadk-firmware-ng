@@ -18,3 +18,5 @@
 #if defined(USE_AUDIO_I2S)
 #include <audio_dsp.h>
 #endif
+
+#include <sysinit.h>

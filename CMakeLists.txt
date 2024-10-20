@@ -44,6 +44,7 @@ include_directories(
     ".")
 
 add_executable(${PROJECT_NAME}
+    core/src/sysinit.c
     src/main.cpp
 )
 
@@ -91,6 +92,7 @@ endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         CPU_FREQ_KHZ=${CPU_FREQ_KHZ}
+        CPU_OVERCLOCK=${CPU_OVERCLOCK}
         USE_AUDIO_I2S=${ENABLE_AUDIO_I2S}
         USB_MODE_PICOSDK=${USB_MODE_PICOSDK}
 

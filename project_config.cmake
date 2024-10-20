@@ -7,6 +7,7 @@ set(USB_MODE_PICOSDK 1)
 
 # CPU Related settings
 set(CPU_FREQ_KHZ 150000)
+set(CPU_OVERCLOCK 1)
 
 # Audio settings
 set(AUDIO_SAMPLE_RATE 48000)

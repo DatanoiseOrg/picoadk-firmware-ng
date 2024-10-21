@@ -10,13 +10,13 @@ On macOS (using Homebrew)
 
 Install Homebrew (if not installed):
 
-```bash
+```console
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Install the required tools:
 
-```bash
+```console
 brew install cmake gcc-arm-embedded git cpplint
 ```
 
@@ -24,7 +24,7 @@ brew install cmake gcc-arm-embedded git cpplint
 
 Update and install the required packages:
 
-```bash
+```console
 sudo apt update
 sudo apt install cmake gcc-arm-none-eabi build-essential git cpplint
 ```
@@ -37,27 +37,27 @@ Follow the instructions for Debian/Ubuntu inside your WSL instance.
 
 Clone the PicoADK NG Firmware repository:
 
-```bash
+```console
 git clone --recursive --recurse-submodules https://github.com/DatanoiseOrg/picoadk-firmware-ng.git
 cd picoadk-firmware-ng
 ```
 
 Create a build directory:
 
-```bash
+```console
 mkdir build
 cd build
 ```
 
 Run CMake to generate the build system:
 
-```bash
+```console
 cmake ..
 ```
 
 Build the project:
 
-```bash
+```console
 make ( Add -j to build in parallel using all your CPU cores )
 ```
 

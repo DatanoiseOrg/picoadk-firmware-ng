@@ -1,10 +1,6 @@
 # PicoADK NG Firmware
 
-This is a work-in-progress rework of the Datanoise PicoADK V2 firmware template
-with a bigger focus on modularity.
-
-While it can be used with other Raspberry RP235x based board, it is stongly
-recommended to be used with the PicoADK V2.
+This is a work-in-progress rework of the Datanoise PicoADK V2 firmware with a focus on modularity.
 
 ## Prerequisites
 
@@ -119,3 +115,7 @@ SOFTWARE.
 ### Third-Party Libraries
 
 Please note that libraries located in the core/lib folder may be licensed under different terms. Be sure to review the license information provided in the respective library files.
+
+## Hardware options
+While it can be used with other Raspberry RP235x based boards, it is stongly
+recommended to be used with the PicoADK V2.

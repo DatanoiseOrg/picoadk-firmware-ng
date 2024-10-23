@@ -71,24 +71,27 @@ target_link_libraries(${PROJECT_NAME}
         hardware_sync
 )
 
-# Check if USB_MODE_PICOSDK is defined
-if(NOT USB_MODE_PICOSDK)
-    target_link_libraries(${PROJECT_NAME}
-        tinyusb_device
-        tinyusb_board
-    )
-endif()
 
-if(ENABLE_AUDIO_I2S)
+
+if(ENABLE_AUDIO_I2S STREQUAL "1")
     add_subdirectory(core/lib/audio)
     target_link_libraries(${PROJECT_NAME} Audio)
     target_include_directories(${PROJECT_NAME} PRIVATE core/lib/audio/include)
     target_sources(${PROJECT_NAME} PRIVATE src/audio_dsp.cpp)
 endif()
 
-if(ENABLE_FREERTOS)
+if(ENABLE_FREERTOS STREQUAL "1")
     target_link_libraries(${PROJECT_NAME} FreeRTOS)
 endif()
+
+if(USB_MODE_PICOSDK STREQUAL "0")
+    target_sources(${PROJECT_NAME} PRIVATE core/src/usb_descriptors.c)
+    target_link_libraries(${PROJECT_NAME}
+    tinyusb_device
+    tinyusb_board
+)
+endif()
+
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         CPU_FREQ_KHZ=${CPU_FREQ_KHZ}

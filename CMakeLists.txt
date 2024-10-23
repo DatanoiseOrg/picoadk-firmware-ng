@@ -85,7 +85,7 @@ if(ENABLE_FREERTOS STREQUAL "1")
 endif()
 
 if(USB_MODE_PICOSDK STREQUAL "0")
-    target_sources(${PROJECT_NAME} PRIVATE core/src/usb_descriptors.c)
+    target_sources(${PROJECT_NAME} PRIVATE core/src/usb_descriptors.c core/src/get_serial.c)
     target_link_libraries(${PROJECT_NAME}
     tinyusb_device
     tinyusb_board

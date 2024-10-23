@@ -13,7 +13,7 @@ audio_buffer_pool_t *audiopool;
 
 int init_audio_i2s() {
     #if defined(USE_AUDIO_I2S)
-    // audiopool = init_audio();
+    audiopool = init_audio();
 
     if (audiopool == NULL) {
         printf("Failed to initialize audio subsystem\n");
@@ -36,9 +36,9 @@ void __not_in_flash_func(i2s_callback_func()) {
 
         // We are filling the buffer with 32-bit samples (2 channels)
         for (uint i = 0; i < buffer->max_sample_count; i++) {
-            float left_out, right_out = 0.0f;
-            samples[i * 2 + 0] = float_to_int32(left_out);
-            samples[i * 2 + 1] = float_to_int32(right_out);
+            //float left_out, right_out = 0.0f;
+            samples[i * 2 + 0] = 0; // float_to_int32(left_out);
+            samples[i * 2 + 1] = 0; //float_to_int32(right_out);
         }
 
         buffer->sample_count = buffer->max_sample_count;

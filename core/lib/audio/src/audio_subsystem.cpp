@@ -1,6 +1,10 @@
 #include "audio_subsystem.h"
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 audio_buffer_pool_t *init_audio()
 {
 
@@ -74,3 +78,7 @@ audio_buffer_pool_t *init_audio()
 #endif
     return producer_pool;
 }
+
+#ifdef __cplusplus
+}
+#endif

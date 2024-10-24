@@ -2,6 +2,10 @@
 
 This is a work-in-progress rework of the Datanoise PicoADK V2 firmware with a focus on modularity.
 
+# Note
+
+This is work-in-progress and most likely things are still not implemented or broken.
+
 ## Prerequisites
 
 ### MacOS
